@@ -2,13 +2,14 @@ package promtail
 
 import (
 	"fmt"
-	"github.com/golang/protobuf/proto"
-	"github.com/golang/protobuf/ptypes/timestamp"
-	"github.com/golang/snappy"
-	"github.com/afiskon/promtail-client/logproto"
 	"log"
 	"sync"
 	"time"
+
+	"github.com/ITV/promtail-client-1/logproto"
+	"github.com/golang/protobuf/proto"
+	"github.com/golang/protobuf/ptypes/timestamp"
+	"github.com/golang/snappy"
 )
 
 type protoLogEntry struct {
@@ -63,7 +64,7 @@ func (c *clientProto) log(format string, level LogLevel, prefix string, args ...
 					Seconds: now / int64(time.Second),
 					Nanos:   int32(now % int64(time.Second)),
 				},
-				Line: fmt.Sprintf(prefix+format, args...),
+				Line: fmt.Sprintf(format, args...),
 			},
 			level: level,
 		}

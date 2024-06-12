@@ -11,7 +11,7 @@ import (
 type jsonLogEntry struct {
 	Ts    time.Time `json:"ts"`
 	Line  string    `json:"line"`
-	level LogLevel // not used in JSON
+	level LogLevel  // not used in JSON
 }
 
 type promtailStream struct {
@@ -65,7 +65,7 @@ func (c *clientJson) log(format string, level LogLevel, prefix string, args ...i
 	if (level >= c.config.SendLevel) || (level >= c.config.PrintLevel) {
 		c.entries <- &jsonLogEntry{
 			Ts:    time.Now(),
-			Line:  fmt.Sprintf(prefix+format, args...),
+			Line:  fmt.Sprintf(format, args...),
 			level: level,
 		}
 	}
