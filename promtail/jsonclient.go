@@ -91,19 +91,16 @@ func (c *clientJson) run() {
 		case <-c.quit:
 			return
 		case entry := <-c.entries:
-			if entry.level >= c.config.PrintLevel {
-				log.Print(entry.Line)
-			}
 
-			if entry.level >= c.config.SendLevel {
-				batch = append(batch, entry)
-				batchSize++
-				if batchSize >= c.config.BatchEntriesNumber {
-					c.send(batch)
-					batch = []*jsonLogEntry{}
-					batchSize = 0
-					maxWait.Reset(c.config.BatchWait)
-				}
+			log.Print(entry.Line)
+
+			batch = append(batch, entry)
+			batchSize++
+			if batchSize >= c.config.BatchEntriesNumber {
+				c.send(batch)
+				batch = []*jsonLogEntry{}
+				batchSize = 0
+				maxWait.Reset(c.config.BatchWait)
 			}
 		case <-maxWait.C:
 			if batchSize > 0 {
