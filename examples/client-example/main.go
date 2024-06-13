@@ -57,8 +57,6 @@ func main() {
 		Labels:             labels,
 		BatchWait:          5 * time.Second,
 		BatchEntriesNumber: 10000,
-		SendLevel:          promtail.INFO,
-		PrintLevel:         promtail.ERROR,
 	}
 
 	var (
