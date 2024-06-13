@@ -66,7 +66,6 @@ func (c *clientProto) log(format string, level LogLevel, prefix string, args ...
 				},
 				Line: fmt.Sprintf(format, args...),
 			},
-			level: level,
 		}
 	}
 }
