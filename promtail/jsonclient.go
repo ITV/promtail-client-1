@@ -11,7 +11,7 @@ import (
 type jsonLogEntry struct {
 	Ts    time.Time `json:"ts"`
 	Line  string    `json:"line"`
-	level string
+	level string    `json:"level"`
 }
 
 type promtailStream struct {
