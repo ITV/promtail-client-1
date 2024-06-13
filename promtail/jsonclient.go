@@ -9,8 +9,9 @@ import (
 )
 
 type jsonLogEntry struct {
-	Ts   time.Time `json:"ts"`
-	Line string    `json:"line"`
+	Ts    time.Time `json:"ts"`
+	Line  string    `json:"line"`
+	level string
 }
 
 type promtailStream struct {
@@ -62,8 +63,9 @@ func (c *clientJson) Errorf(format string, args ...interface{}) {
 
 func (c *clientJson) log(format string, args ...interface{}) {
 	c.entries <- &jsonLogEntry{
-		Ts:   time.Now(),
-		Line: fmt.Sprintf(format, args...),
+		Ts:    time.Now(),
+		Line:  fmt.Sprintf(format, args...),
+		level: "info",
 	}
 }
 
